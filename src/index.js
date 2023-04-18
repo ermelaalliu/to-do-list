@@ -1,8 +1,22 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const dotenv = require('dotenv').config({path: './.env.development'});
 const personRoute = require('./routes/person');
 const path = require('path');
+
+const uri = `mongodb+srv://${process.env.MONGODB_DATABASE_USERNAME}:${process.env.MONGODB_DATABASE_PASSWORD}@cluster0.to7knoy.mongodb.net/?retryWrites=true&w=majority`;
+
+async function connectToMongoDB(){
+    try {
+        await mongoose.connect(uri);
+        console.log("connected to mongodb");
+    } catch ( error ) {
+        console.error(error);
+    }
+}
+
+connectToMongoDB();
 
 app.use((req, res, next) => {
     console.log(`${new Date().toString()} => ${req.originalUrl}`)
