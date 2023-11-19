@@ -10,7 +10,7 @@ const uri = `mongodb+srv://${process.env.MONGODB_DATABASE_USERNAME}:${process.en
 async function connectToMongoDB(){
     try {
         await mongoose.connect(uri);
-        console.log("connected to mongodb");
+        console.log("Connected to mongodb");
     } catch ( error ) {
         console.error(error);
     }
